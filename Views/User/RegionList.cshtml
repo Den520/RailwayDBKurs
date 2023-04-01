@@ -1,0 +1,50 @@
+﻿@model List<Region>
+@{
+    ViewBag.Title = "Список участков";
+}
+
+<h1 class="display-4 text-center">Участки</h1>
+<div class="main-content">
+
+    @Html.ActionLink("Добавить участок", "AddRegion", new EmptyResult(), new { @class = "button green float-right" })
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер участка</th>
+                    <th>Протяжённость (км)</th>
+                    <th>Дата ввода в эксплуатацию</th>
+                    <th>Количество поездов</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var region in Model)
+                {
+                    <tr>
+                        <td>
+                            @region.ID
+                        </td>
+                        <td>
+                            @region.Length
+                        </td>
+                        <td>
+                            @if (region.DateOfExploitation != null)
+                            {
+                                @region.DateOfExploitation.Value.ToShortDateString()
+                            }
+                            else
+                            {
+                                <span>Не был введён в эксплуатацию</span>
+                            }
+                        </td>
+                        <td>
+                            @region.ValueOfTrains
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

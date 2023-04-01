@@ -1,0 +1,31 @@
+﻿@model RailwayDBKurs.Models.Region
+@{
+    ViewBag.Title = "Редактирование участка";
+}
+
+<h1 class="display-4 text-center">Редактировать участок</h1>
+<div class="main-content">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            <p>Протяжённость (км)</p>
+            @Html.TextBoxFor(x => x.Length, Model.Length.ToString(), new { type="number", min=0, required="" })
+        </div>
+        <br />
+        <div>
+            <p>Дата ввода в эксплуатацию</p>
+            @Html.TextBoxFor(x => x.DateOfExploitation, Model.DateOfExploitation.GetValueOrDefault().ToString("yyyy-MM-dd"), new { type="date" })
+        </div>
+        <br />
+        <div>
+            <p>Количество поездов</p>
+            @Html.TextBoxFor(x => x.ValueOfTrains, Model.ValueOfTrains.ToString(), new { type="number", min=0, required="" })
+        </div>
+        <br />
+
+        <a href="#" onclick="window.history.back()">Отмена</a>
+        <input class="button green" type="submit" value="Сохранить изменения" />
+    }
+</div>

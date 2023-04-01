@@ -1,0 +1,69 @@
+﻿@model List<Depot>
+@{
+    ViewBag.Title = "Список депо";
+}
+
+<h1 class="display-4 text-center">Депо</h1>
+<div class="main-content">
+
+    @Html.ActionLink("Добавить депо", "AddDepot", new EmptyResult(), new { @class = "button green float-right" })
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер депо</th>
+                    <th>Номер участка</th>
+                    <th>Название депо</th>
+                    <th>Статус</th>
+                    <th>Количество сотрудников</th>
+                    <th>Количество вагонов в парке</th>
+                    <th>Ответственное лицо</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var depot in Model)
+                {
+                    <tr>
+                        <td>
+                            @depot.ID
+                        </td>
+                        <td>
+                            @depot.RegionID
+                        </td>
+                        <td>
+                            @depot.Name
+                        </td>
+                        <td>
+                            @if (depot.Status)
+                            {
+                                <span>Действующий</span>
+                            }
+                            else
+                            {
+                                <span>Не действующий</span>
+                            }
+                        </td>
+                        <td>
+                            @depot.ValueOfEmployees
+                        </td>
+                        <td>
+                            @depot.ValueOfVans
+                        </td>
+                        <td>
+                            @depot.Director
+                        </td>
+                        <td>
+                            <div class="edit-buttons">
+                                @Html.ActionLink("Редактировать", "EditDepot", new { id = depot.ID }, new { @class = "button blue" })
+                                @Html.ActionLink("Удалить", "DeleteDepot", new { id = depot.ID }, new { style = "color: red" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

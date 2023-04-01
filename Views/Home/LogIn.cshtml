@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Добро пожаловать!";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Выберите пользователя для входа</h1>
+    <div class="main-content">
+        @Html.ActionLink("Администратор", "Index", "Admin", new EmptyResult(), new { @class="button blue" })
+        @Html.ActionLink("Пользователь", "Index", "User", new EmptyResult(), new { @class="button blue" })
+    </div>
+</div>

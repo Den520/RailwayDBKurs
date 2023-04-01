@@ -1,0 +1,21 @@
+﻿@model RailwayDBKurs.Models.Van
+@{
+    ViewBag.Title = "Редактирование вагона";
+}
+
+<h1 class="display-4 text-center">Редактировать вагон</h1>
+<div class="main-content">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            <p>Тип вагона</p>
+            <p>@Html.DropDownListFor(x => x.Type, new SelectList(new string[] { "Плацкартный", "Купе", "Сидячий", "Люкс", "Грузовой"}))</p>
+        </div>
+        <br />
+
+        <a href="#" onclick="window.history.back()">Отмена</a>
+        <input class="button green" type="submit" value="Сохранить изменения" />
+    }
+</div>

@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "Список событий по ремонту вагонов";
+}
+
+<h1 class="display-4 text-center">События по ремонту вагонов</h1>
+<div class="main-content">
+
+    @Html.ActionLink("Добавить ремонтное событие", "AddRepairVanEvent", new EmptyResult(), new { @class = "button green float-right" })
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер события</th>
+                    <th>Номер вагона</th>
+                    <th>Номер ответственного депо</th>
+                    <th>Дата начала</th>
+                    <th>Дата окончания</th>
+                    <th>Статус</th>
+                    <th>Описание</th>
+                    <th>Список ремонтируемых частей</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var repairEvent in ViewBag.VanEvents)
+                {
+                    <tr>
+                        <td>
+                        @repairEvent.mainValues.ID
+                        </td>
+                        <td>
+                        @repairEvent.mainValues.VanID
+                        </td>
+                        <td>
+                        @repairEvent.extraValues.DepotID
+                        </td>
+                        <td>
+                        @if (repairEvent.extraValues.BeginDate != null)
+                        {
+                            @repairEvent.extraValues.BeginDate.ToShortDateString()
+                        }
+                        else
+                        {
+                                        <p>Дата не установлена</p>
+                        }
+                        </td>
+                        <td>
+                        @if (repairEvent.extraValues.EndDate != null)
+                        {
+                            @repairEvent.extraValues.EndDate.ToShortDateString()
+                        }
+                        else
+                        {
+                                        <p>Дата не установлена</p>
+                        }
+                        </td>
+                        <td>
+                        @repairEvent.extraValues.Status
+                        </td>
+                        <td>
+                        @repairEvent.extraValues.Description
+                        </td>
+                        <td>
+                        @repairEvent.mainValues.ListOfRepairedParts
+                        </td>
+                        <td>
+                            <div class="edit-buttons">
+                            @Html.ActionLink("Редактировать", "EditRepairVanEvent", new { id = repairEvent.mainValues.ID }, new { @class = "button blue" })
+                            @Html.ActionLink("Удалить", "DeleteRepairVanEvent", new { id = repairEvent.mainValues.ID }, new { style = "color: red" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

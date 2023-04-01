@@ -1,0 +1,12 @@
+﻿@{
+    ViewBag.Title = "Главная страница";
+}
+
+<h1>Представление для пользователя</h1>
+<div>
+    @Html.ActionLink("Список участков", "RegionList")
+    @Html.ActionLink("Список депо", "DepotList")
+    @Html.ActionLink("Список вагонов", "VanList")
+    @Html.ActionLink("Список ремонтных работ по вагонам", "RepairVanEventList")
+    @Html.ActionLink("Список ремонтных работ по ЖД", "RepairRailwayEventList")
+</div>

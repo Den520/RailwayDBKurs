@@ -1,0 +1,57 @@
+﻿@model RailwayDBKurs.Models.Depot
+@{
+    ViewBag.Title = "Редактирование депо";
+}
+
+<h1 class="display-4 text-center">Редактировать депо</h1>
+<div class="main-content">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            <p>Номер участка</p>
+            <p>@Html.DropDownListFor(x => x.RegionID, (SelectList)ViewBag.regions)</p>
+        </div>
+        <br />
+        <div>
+            <p>Название</p>
+            <p>@Html.TextBoxFor(x => x.Name, Model.Name, new { required="" })</p>
+        </div>
+        <br />
+        <div>
+            <p>Текущий статус</p>
+            <select name="Status">
+                @if (Model.Status)
+                {
+                    <option value="true" selected>Действующий</option>
+                    <option value="false">Не действующий</option>
+                }
+                else
+                {
+                    <option value="true">Действующий</option>
+                    <option value="false" selected>Не действующий</option>
+                }
+            </select>
+        </div>
+        <br />
+        <div>
+            <p>Количество сотрудников</p>
+            <p>@Html.TextBoxFor(x => x.ValueOfEmployees, Model.ValueOfEmployees.ToString(), new { type="number", min=0, required="" })</p>
+        </div>
+        <br />
+        <div>
+            <p>Количество вагонов</p>
+            <p>@Html.TextBoxFor(x => x.ValueOfVans, Model.ValueOfVans.ToString(), new { type="number", min=0, required="" })</p>
+        </div>
+        <br />
+        <div>
+            <p>Ответственное лицо (необязательно)</p>
+            <p>@Html.TextBoxFor(x => x.Director)</p>
+        </div>
+        <br />
+
+        <a href="#" onclick="window.history.back()">Отмена</a>
+        <input class="button green" type="submit" value="Сохранить изменения" />
+    }
+</div>

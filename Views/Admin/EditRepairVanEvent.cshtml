@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Редактирование рем. события для вагона";
+    CommonRepairEvent commonEventDetails = ViewBag.commonEventDetails;
+    RepairVanEvent vanEventDetails = ViewBag.vanEventDetails;
+}
+
+<h1 class="display-4 text-center">Редактировать рем. событие для вагона</h1>
+<div class="main-content">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            <p>Ответственное депо</p>
+            @Html.DropDownList("DepotID", (SelectList)ViewBag.depots, commonEventDetails.DepotID)
+        </div>
+        <br />
+        <div>
+            <p>Дата начала</p>
+            @Html.TextBox("BeginDate", commonEventDetails.BeginDate.GetValueOrDefault().ToString("yyyy-MM-dd"), new { type="date" })
+        </div>
+        <br />
+        <div>
+            <p>Дата окончания</p>
+            @Html.TextBox("EndDate", commonEventDetails.EndDate.GetValueOrDefault().ToString("yyyy-MM-dd"), new { type="date" })
+        </div>
+        <br />
+        <div>
+            <p>Текущий статус</p>
+            @Html.DropDownList("Status", new SelectList(new [] { "В очереди", "В процессе", "Завершено", "Приостановлено", "Заброшено" }, commonEventDetails.Status))
+        </div>
+        <br />
+        <div>
+            <p>Детальное описание (необязательно)</p>
+            @Html.TextBox("Description", commonEventDetails.Description)
+        </div>
+        <br />
+        <div>
+            <p>Номер ремонтируемого вагона</p>
+            @Html.DropDownList("VanID", (SelectList)ViewBag.vans)
+        </div>
+        <br />
+        <div>
+            <p>Список ремонтируемых деталей (частей) вагона</p>
+            @Html.TextBox("ListOfRepairedParts", vanEventDetails.ListOfRepairedParts, new { required="" })
+        </div>
+        <br />
+
+        <a href="#" onclick="window.history.back()">Отмена</a>
+        <input class="button green" type="submit" value="Сохранить изменения" />
+    }
+</div>

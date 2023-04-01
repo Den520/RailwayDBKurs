@@ -1,0 +1,42 @@
+﻿@model List<Van>
+@{
+    ViewBag.Title = "Список вагонов";
+}
+
+<h1 class="display-4 text-center">Вагоны</h1>
+<div class="main-content">
+
+    @Html.ActionLink("Добавить вагон", "AddVan", new EmptyResult(), new { @class = "button green float-right" })
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер вагона</th>
+                    <th>Тип вагона</th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var van in Model)
+                {
+                    <tr>
+                        <td>
+                            @van.ID
+                        </td>
+                        <td>
+                            @van.Type
+                        </td>
+                        <td>
+                            <div class="edit-buttons">
+                                @Html.ActionLink("Редактировать", "EditVan", new { id = van.ID }, new { @class = "button blue" })
+                                @Html.ActionLink("Удалить", "DeleteVan", new { id = van.ID }, new { style = "color: red" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

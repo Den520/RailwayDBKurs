@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Список событий по ремонту ЖД";
+}
+
+<h1 class="display-4 text-center">События по ремонту ЖД</h1>
+<div class="main-content">
+
+    @Html.ActionLink("Добавить событие", "AddRepairRailwayEvent", new EmptyResult(), new { @class = "button green float-right" })
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Номер события</th>
+                    <th>Номер участка</th>
+                    <th>Номер ответственного депо</th>
+                    <th>Начальная точка (км)</th>
+                    <th>Конечная точка (км)</th>
+                    <th>Дата начала</th>
+                    <th>Дата окончания</th>
+                    <th>Статус</th>
+                    <th>Описание</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var repairEvent in ViewBag.RailwayEvents)
+                {
+                    <tr>
+                        <td>
+                        @repairEvent.mainValues.ID
+                        </td>
+                        <td>
+                        @repairEvent.mainValues.RegionID
+                        </td>
+                        <td>
+                        @repairEvent.extraValues.DepotID
+                        </td>
+                        <td>
+                        @repairEvent.mainValues.BeginPoint
+                        </td>
+                        <td>
+                        @repairEvent.mainValues.EndPoint
+                        </td>
+                        <td>
+                        @if (repairEvent.extraValues.BeginDate != null)
+                        {
+                            @repairEvent.extraValues.BeginDate.ToShortDateString()
+                        }
+                        else
+                        {
+                                    <p>Дата не установлена</p>
+                        }
+                        </td>
+                        <td>
+                        @if (repairEvent.extraValues.EndDate != null)
+                        {
+                            @repairEvent.extraValues.EndDate.ToShortDateString()
+                        }
+                        else
+                        {
+                                    <p>Дата не установлена</p>
+                        }
+                        </td>
+                        <td>
+                        @repairEvent.extraValues.Status
+                        </td>
+                        <td>
+                        @repairEvent.extraValues.Description
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

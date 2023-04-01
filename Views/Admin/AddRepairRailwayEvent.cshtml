@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Добавление рем. события для ЖД";
+}
+
+<h1 class="display-4 text-center">Добавить рем. событие для ЖД</h1>
+<div class="main-content">
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary()
+
+        <div>
+            <p>Ответственное депо</p>
+            @Html.DropDownList("DepotID", (SelectList)ViewBag.depots)
+        </div>
+        <br />
+        <div>
+            <p>Дата начала</p>
+            @Html.TextBox("BeginDate", $"{@DateTime.Now.Year}-01-01", new { type="date" })
+        </div>
+        <br />
+        <div>
+            <p>Дата окончания</p>
+            @Html.TextBox("EndDate", @DateTime.Now.ToString("yyyy-MM-dd"), new { type="date" })
+        </div>
+        <br />
+        <div>
+            <p>Текущий статус</p>
+            @Html.DropDownList("Status", new SelectList(new [] { "В очереди", "В процессе", "Завершено", "Приостановлено", "Заброшено" }))
+        </div>
+        <br />
+        <div>
+            <p>Детальное описание (необязательно)</p>
+            @Html.TextBox("Description")
+        </div>
+        <br />
+        <div>
+            <p>Номер участка</p>
+            @Html.DropDownList("RegionID", (SelectList)ViewBag.regions)
+        </div>
+        <br />
+        <div>
+            <p>Начальная точка (км)</p>
+            @Html.TextBox("BeginPoint", "", new { type="number", min=0, required="" })
+        </div>
+        <br />
+        <div>
+            <p>Конечная точка (км)</p>
+            @Html.TextBox("EndPoint", "", new { type="number", min=0, required="" })
+        </div>
+        <br />
+
+        <a href="#" onclick="window.history.back()">Отмена</a>
+        <input class="button green" type="submit" value="Добавить" />
+    }
+</div>
