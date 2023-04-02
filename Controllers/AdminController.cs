@@ -184,7 +184,7 @@ namespace RailwayDBKurs.Controllers
         [HttpPost]
         public IActionResult AddRepairVanEvent(RepairVanEvent repairVanEvent, CommonRepairEvent commonRepairEvent)
         {
-            db.Database.ExecuteSql($"dbo.NewRepairVanEvent {commonRepairEvent.DepotID}, {commonRepairEvent.BeginDate}, {commonRepairEvent.EndDate}, {commonRepairEvent.Status}, {commonRepairEvent.Description}, {repairVanEvent.VanID}, {repairVanEvent.ListOfRepairedParts}");
+            db.Database.ExecuteSql($"dbo.NewRepairVanEvent {commonRepairEvent.DepotID}, {commonRepairEvent.BeginDate}, {commonRepairEvent.EndDate}, {commonRepairEvent.Status}, {commonRepairEvent.Description}, {repairVanEvent.VanID}, {repairVanEvent.ListOfRepairedParts}, {repairVanEvent.Type}");
             return RedirectToAction("RepairVanEventList");
         }
 

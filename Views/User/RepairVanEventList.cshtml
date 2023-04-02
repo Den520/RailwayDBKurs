@@ -14,6 +14,7 @@
                     <th>Номер события</th>
                     <th>Номер вагона</th>
                     <th>Номер ответственного депо</th>
+                    <th>Тип ремонта</th>
                     <th>Дата начала</th>
                     <th>Дата окончания</th>
                     <th>Статус</th>
@@ -27,42 +28,45 @@
                 {
                     <tr>
                         <td>
-                        @repairEvent.mainValues.ID
+                            @repairEvent.mainValues.ID
                         </td>
                         <td>
-                        @repairEvent.mainValues.VanID
+                            @repairEvent.mainValues.VanID
                         </td>
                         <td>
-                        @repairEvent.extraValues.DepotID
+                            @repairEvent.extraValues.DepotID
                         </td>
                         <td>
-                        @if (repairEvent.extraValues.BeginDate != null)
-                        {
-                            @repairEvent.extraValues.BeginDate.ToShortDateString()
-                        }
-                        else
-                        {
-                                        <p>Дата не установлена</p>
-                        }
+                            @repairEvent.mainValues.Type
                         </td>
                         <td>
-                        @if (repairEvent.extraValues.EndDate != null)
-                        {
-                            @repairEvent.extraValues.EndDate.ToShortDateString()
-                        }
-                        else
-                        {
-                                        <p>Дата не установлена</p>
-                        }
+                            @if (repairEvent.extraValues.BeginDate != null)
+                            {
+                                @repairEvent.extraValues.BeginDate.ToShortDateString()
+                            }
+                            else
+                            {
+                                <span>Дата не установлена</span>
+                            }
                         </td>
                         <td>
-                        @repairEvent.extraValues.Status
+                            @if (repairEvent.extraValues.EndDate != null)
+                            {
+                                @repairEvent.extraValues.EndDate.ToShortDateString()
+                            }
+                            else
+                            {
+                                <span>Дата не установлена</span>
+                            }
                         </td>
                         <td>
-                        @repairEvent.extraValues.Description
+                            @repairEvent.extraValues.Status
                         </td>
                         <td>
-                        @repairEvent.mainValues.ListOfRepairedParts
+                            @repairEvent.extraValues.Description
+                        </td>
+                        <td>
+                            @repairEvent.mainValues.ListOfRepairedParts
                         </td>
                     </tr>
                 }

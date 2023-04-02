@@ -14,6 +14,7 @@
                     <th>Номер события</th>
                     <th>Номер вагона</th>
                     <th>Номер ответственного депо</th>
+                    <th>Тип ремонта</th>
                     <th>Дата начала</th>
                     <th>Дата окончания</th>
                     <th>Статус</th>
@@ -28,13 +29,16 @@
                 {
                     <tr>
                         <td>
-                        @repairEvent.mainValues.ID
+                            @repairEvent.mainValues.ID
                         </td>
                         <td>
-                        @repairEvent.mainValues.VanID
+                            @repairEvent.mainValues.VanID
                         </td>
                         <td>
-                        @repairEvent.extraValues.DepotID
+                            @repairEvent.extraValues.DepotID
+                        </td>
+                        <td>
+                            @repairEvent.mainValues.Type
                         </td>
                         <td>
                         @if (repairEvent.extraValues.BeginDate != null)
@@ -43,7 +47,7 @@
                         }
                         else
                         {
-                                        <p>Дата не установлена</p>
+                                        <span>Дата не установлена</span>
                         }
                         </td>
                         <td>
@@ -53,17 +57,17 @@
                         }
                         else
                         {
-                                        <p>Дата не установлена</p>
+                                        <span>Дата не установлена</span>
                         }
                         </td>
                         <td>
-                        @repairEvent.extraValues.Status
+                            @repairEvent.extraValues.Status
                         </td>
                         <td>
-                        @repairEvent.extraValues.Description
+                            @repairEvent.extraValues.Description
                         </td>
                         <td>
-                        @repairEvent.mainValues.ListOfRepairedParts
+                            @repairEvent.mainValues.ListOfRepairedParts
                         </td>
                         <td>
                             <div class="edit-buttons">

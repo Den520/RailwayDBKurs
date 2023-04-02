@@ -14,6 +14,11 @@
         </div>
         <br />
         <div>
+            <p>Тип ремонта</p>
+            @Html.DropDownList("Type", new SelectList(new [] { "ТО", "ТР-1", "ТР-2", "ДР", "КР", "КРП" }))
+        </div>
+        <br />
+        <div>
             <p>Дата начала</p>
             @Html.TextBox("BeginDate", $"{@DateTime.Now.Year}-01-01", new { type="date" })
         </div>
