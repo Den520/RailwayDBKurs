@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using RailwayDBKurs.Models;
-using System.Collections;
-using System.Data.SqlTypes;
 
 namespace RailwayDBKurs.Controllers
 {

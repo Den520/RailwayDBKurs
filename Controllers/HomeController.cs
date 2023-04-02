@@ -16,7 +16,7 @@ namespace RailwayDBKurs.Controllers
         {
             return View("~/Views/" + ControllerContext.RouteData.Values["controller"] + "/Index.cshtml");
         }
-        
+
         public IActionResult LogIn()
         {
             return View();
