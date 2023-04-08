@@ -91,9 +91,17 @@ namespace RailwayDBKurs.Controllers
         [HttpPost]
         public IActionResult AddDepot(Depot depot)
         {
-            var statuses = new Dictionary<string, bool>() { ["Действующий"] = true, ["Не действующий"] = false };
             db.Depot.Add(depot);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Участок или название уже используются. Введите другие значения.");
+                ViewBag.regions = new SelectList(db.Regions.Select(x => x.ID).ToArray(), depot.RegionID);
+                return View(depot);
+            }
             return RedirectToAction("DepotList");
         }
 
@@ -107,7 +115,16 @@ namespace RailwayDBKurs.Controllers
         public IActionResult EditDepot(Depot depot)
         {
             db.Depot.Update(depot);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+            }
+            catch
+            {
+                ModelState.AddModelError("", "Участок или название уже используются. Введите другие значения.");
+                ViewBag.regions = new SelectList(db.Regions.Select(x => x.ID).ToArray(), depot.RegionID);
+                return View(depot);
+            }
             return RedirectToAction("DepotList");
         }
 
