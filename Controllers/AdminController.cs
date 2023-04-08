@@ -71,6 +71,17 @@ namespace RailwayDBKurs.Controllers
             return View(db.Depot.ToList());
         }
 
+        [HttpPost]
+        public IActionResult DepotList(string NameSearch)
+        {
+            Depot[] depots = db.Depot.ToArray();
+            if (NameSearch != null)
+            {
+                depots = depots.Where(x => x.Name.ToLower().Contains(NameSearch.ToLower())).ToArray();
+            }
+            return View(depots.ToList());
+        }
+
         public IActionResult AddDepot()
         {
             ViewBag.regions = new SelectList(db.Regions.Select(x => x.ID).ToArray());
@@ -169,6 +180,49 @@ namespace RailwayDBKurs.Controllers
                     {
                         mainValues = o,
                         extraValues = i
+                    })
+                .Join(
+                    db.Depot.ToArray(),
+                    o => o.extraValues.DepotID,
+                    i => i.ID,
+                    (o, i) => new {
+                        mainValues = o.mainValues,
+                        extraValues = o.extraValues,
+                        DepotName = i.Name
+                    });
+            ViewBag.VanEvents = fullVanEvents;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RepairVanEventList(string StatusFilter)
+        {
+            RepairVanEvent[] vanEvents = db.RepairVanEvents.ToArray();
+            CommonRepairEvent[] commonEvents = db.RepairEvents.ToArray();
+
+            if (StatusFilter != "Выбрать все")
+            {
+                commonEvents = commonEvents.Where(x => x.Status == StatusFilter).ToArray();
+            }
+
+            var fullVanEvents = vanEvents
+                .Join(
+                    commonEvents,
+                    o => o.ID,
+                    i => i.ID,
+                    (o, i) => new
+                    {
+                        mainValues = o,
+                        extraValues = i
+                    })
+                .Join(
+                    db.Depot.ToArray(),
+                    o => o.extraValues.DepotID,
+                    i => i.ID,
+                    (o, i) => new {
+                        mainValues = o.mainValues,
+                        extraValues = o.extraValues,
+                        DepotName = i.Name
                     });
             ViewBag.VanEvents = fullVanEvents;
             return View();
@@ -235,6 +289,49 @@ namespace RailwayDBKurs.Controllers
                     {
                         mainValues = o,
                         extraValues = i
+                    })
+                .Join(
+                    db.Depot.ToArray(),
+                    o => o.extraValues.DepotID,
+                    i => i.ID,
+                    (o, i) => new {
+                        mainValues = o.mainValues,
+                        extraValues = o.extraValues,
+                        DepotName = i.Name
+                    });
+            ViewBag.RailwayEvents = fullRailwayEvents;
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult RepairRailwayEventList(string StatusFilter)
+        {
+            RepairRailwayEvent[] railwayEvents = db.RepairRailwayEvents.ToArray();
+            CommonRepairEvent[] commonEvents = db.RepairEvents.ToArray();
+
+            if (StatusFilter != "Выбрать все")
+            {
+                commonEvents = commonEvents.Where(x => x.Status == StatusFilter).ToArray();
+            }
+
+            var fullRailwayEvents = railwayEvents
+                .Join(
+                    commonEvents,
+                    o => o.ID,
+                    i => i.ID,
+                    (o, i) => new
+                    {
+                        mainValues = o,
+                        extraValues = i
+                    })
+                .Join(
+                    db.Depot.ToArray(),
+                    o => o.extraValues.DepotID,
+                    i => i.ID,
+                    (o, i) => new {
+                        mainValues = o.mainValues,
+                        extraValues = o.extraValues,
+                        DepotName = i.Name
                     });
             ViewBag.RailwayEvents = fullRailwayEvents;
             return View();

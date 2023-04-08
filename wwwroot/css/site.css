@@ -135,7 +135,15 @@ table tbody tr:last-child td:last-child {
 .button.green {
     background: limegreen;
 }
+.button.gray {
+    color: black !important;
+}
 
 .float-right {
     float: right;
+}
+
+.top-panel {
+    display: flex;
+    justify-content: space-between;
 }

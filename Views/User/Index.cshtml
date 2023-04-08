@@ -2,11 +2,13 @@
     ViewBag.Title = "Главная страница";
 }
 
-<h1>Представление для пользователя</h1>
-<div>
-    @Html.ActionLink("Список участков", "RegionList")
-    @Html.ActionLink("Список депо", "DepotList")
-    @Html.ActionLink("Список вагонов", "VanList")
-    @Html.ActionLink("Список ремонтных работ по вагонам", "RepairVanEventList")
-    @Html.ActionLink("Список ремонтных работ по ЖД", "RepairRailwayEventList")
+<h1 class="display-4 text-center">Выберите список, который хотите посмотреть или изменить</h1>
+<div class="main-content">
+    <ul class="list">
+        <li>@Html.ActionLink("Список участков", "RegionList")</li>
+        <li>@Html.ActionLink("Список депо", "DepotList")</li>
+        <li>@Html.ActionLink("Список вагонов", "VanList")</li>
+        <li>@Html.ActionLink("Список ремонтных работ по вагонам", "RepairVanEventList")</li>
+        <li>@Html.ActionLink("Список ремонтных работ по ЖД", "RepairRailwayEventList")</li>
+    </ul>
 </div>

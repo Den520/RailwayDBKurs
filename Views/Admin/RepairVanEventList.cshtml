@@ -5,7 +5,16 @@
 <h1 class="display-4 text-center">События по ремонту вагонов</h1>
 <div class="main-content">
 
-    @Html.ActionLink("Добавить ремонтное событие", "AddRepairVanEvent", new EmptyResult(), new { @class = "button green float-right" })
+    <div class="top-panel">
+        @using (Html.BeginForm())
+        {
+            <span>Отфильтровать по статусу</span>
+            @Html.DropDownList("StatusFilter", new SelectList(new [] { "Выбрать все", "В очереди", "В процессе", "Завершено", "Приостановлено", "Заброшено" }))
+            <input class="button gray" type="submit" value="Применить" />
+        }
+
+        @Html.ActionLink("Добавить ремонтное событие", "AddRepairVanEvent", new EmptyResult(), new { @class = "button green" })
+    </div>
 
     <div>
         <table>
@@ -13,7 +22,7 @@
                 <tr>
                     <th>Номер события</th>
                     <th>Номер вагона</th>
-                    <th>Номер ответственного депо</th>
+                    <th>Ответственное депо</th>
                     <th>Тип ремонта</th>
                     <th>Дата начала</th>
                     <th>Дата окончания</th>
@@ -35,7 +44,7 @@
                             @repairEvent.mainValues.VanID
                         </td>
                         <td>
-                            @repairEvent.extraValues.DepotID
+                            @repairEvent.DepotName
                         </td>
                         <td>
                             @repairEvent.mainValues.Type
@@ -71,8 +80,8 @@
                         </td>
                         <td>
                             <div class="edit-buttons">
-                            @Html.ActionLink("Редактировать", "EditRepairVanEvent", new { id = repairEvent.mainValues.ID }, new { @class = "button blue" })
-                            @Html.ActionLink("Удалить", "DeleteRepairVanEvent", new { id = repairEvent.mainValues.ID }, new { style = "color: red" })
+                                @Html.ActionLink("Редактировать", "EditRepairVanEvent", new { id = repairEvent.mainValues.ID }, new { @class = "button blue" })
+                                @Html.ActionLink("Удалить", "DeleteRepairVanEvent", new { id = repairEvent.mainValues.ID }, new { style = "color: red" })
                             </div>
                         </td>
                     </tr>

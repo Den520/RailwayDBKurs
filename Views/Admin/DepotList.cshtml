@@ -6,7 +6,16 @@
 <h1 class="display-4 text-center">Депо</h1>
 <div class="main-content">
 
-    @Html.ActionLink("Добавить депо", "AddDepot", new EmptyResult(), new { @class = "button green float-right" })
+    <div class="top-panel">
+        @using (Html.BeginForm())
+        {
+            <span>Поиск по названию</span>
+            @Html.TextBox("NameSearch")
+            <input class="button gray" type="submit" value="Искать" />
+        }
+
+        @Html.ActionLink("Добавить депо", "AddDepot", new EmptyResult(), new { @class = "button green" })
+    </div>
 
     <div>
         <table>

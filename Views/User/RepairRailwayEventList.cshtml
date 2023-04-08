@@ -5,7 +5,14 @@
 <h1 class="display-4 text-center">События по ремонту ЖД</h1>
 <div class="main-content">
 
-    @Html.ActionLink("Добавить событие", "AddRepairRailwayEvent", new EmptyResult(), new { @class = "button green float-right" })
+    <div class="top-panel">
+        @using (Html.BeginForm())
+        {
+            <span>Отфильтровать по статусу</span>
+            @Html.DropDownList("StatusFilter", new SelectList(new [] { "Выбрать все", "В очереди", "В процессе", "Завершено", "Приостановлено", "Заброшено" }))
+            <input class="button gray" type="submit" value="Применить" />
+        }
+    </div>
 
     <div>
         <table>
@@ -13,7 +20,7 @@
                 <tr>
                     <th>Номер события</th>
                     <th>Номер участка</th>
-                    <th>Номер ответственного депо</th>
+                    <th>Ответственное депо</th>
                     <th>Начальная точка (км)</th>
                     <th>Конечная точка (км)</th>
                     <th>Дата начала</th>
@@ -34,7 +41,7 @@
                         @repairEvent.mainValues.RegionID
                         </td>
                         <td>
-                        @repairEvent.extraValues.DepotID
+                        @repairEvent.DepotName
                         </td>
                         <td>
                         @repairEvent.mainValues.BeginPoint
