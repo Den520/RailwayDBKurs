@@ -32,7 +32,7 @@
         <br />
         <div>
             <p>Детальное описание (необязательно)</p>
-            @Html.TextBox("Description")
+            @Html.TextBox("Description", commonEventDetails.Description)
         </div>
         <br />
         <div>
@@ -42,7 +42,7 @@
         <br />
         <div>
             <p>Начальная точка (км)</p>
-            @Html.TextBox("BeginPoint", commonEventDetails.Description, new { type="number", min=0, required="" })
+            @Html.TextBox("BeginPoint", railwayEventDetails.BeginPoint, new { type="number", min=0, required="" })
         </div>
         <br />
         <div>
