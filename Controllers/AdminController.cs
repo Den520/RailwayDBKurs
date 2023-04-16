@@ -255,6 +255,15 @@ namespace RailwayDBKurs.Controllers
         [HttpPost]
         public IActionResult AddRepairVanEvent(RepairVanEvent repairVanEvent, CommonRepairEvent commonRepairEvent)
         {
+            if (commonRepairEvent.BeginDate > commonRepairEvent.EndDate)
+            {
+                ModelState.AddModelError("", "Дата окончания ремонта должна быть после даты начала.");
+                ViewBag.vanEventDetails = repairVanEvent;
+                ViewBag.commonEventDetails = commonRepairEvent;
+                ViewBag.vans = new SelectList(db.Vans.Select(x => x.ID).ToArray(), repairVanEvent.VanID);
+                ViewBag.depots = new SelectList(db.Depot.Select(x => new { x.ID, x.Name }).ToArray(), "ID", "Name", commonRepairEvent.DepotID);
+                return View();
+            }
             db.Database.ExecuteSql($"dbo.NewRepairVanEvent {commonRepairEvent.DepotID}, {commonRepairEvent.BeginDate}, {commonRepairEvent.EndDate}, {commonRepairEvent.Status}, {commonRepairEvent.Description}, {repairVanEvent.VanID}, {repairVanEvent.ListOfRepairedParts}, {repairVanEvent.Type}");
             return RedirectToAction("RepairVanEventList");
         }
@@ -273,6 +282,15 @@ namespace RailwayDBKurs.Controllers
         [HttpPost]
         public IActionResult EditRepairVanEvent(RepairVanEvent repairVanEvent, CommonRepairEvent commonRepairEvent)
         {
+            if (commonRepairEvent.BeginDate > commonRepairEvent.EndDate)
+            {
+                ModelState.AddModelError("", "Дата окончания ремонта должна быть после даты начала.");
+                ViewBag.vanEventDetails = repairVanEvent;
+                ViewBag.commonEventDetails = commonRepairEvent;
+                ViewBag.vans = new SelectList(db.Vans.Select(x => x.ID).ToArray(), repairVanEvent.VanID);
+                ViewBag.depots = new SelectList(db.Depot.Select(x => new { x.ID, x.Name }).ToArray(), "ID", "Name", commonRepairEvent.DepotID);
+                return View();
+            }
             db.RepairEvents.Update(commonRepairEvent);
             db.RepairVanEvents.Update(repairVanEvent);
             db.SaveChanges();
@@ -364,6 +382,15 @@ namespace RailwayDBKurs.Controllers
         [HttpPost]
         public IActionResult AddRepairRailwayEvent(RepairRailwayEvent repairRailwayEvent, CommonRepairEvent commonRepairEvent)
         {
+            if (commonRepairEvent.BeginDate > commonRepairEvent.EndDate)
+            {
+                ModelState.AddModelError("", "Дата окончания ремонта должна быть после даты начала.");
+                ViewBag.railwayEventDetails = repairRailwayEvent;
+                ViewBag.commonEventDetails = commonRepairEvent;
+                ViewBag.regions = new SelectList(db.Regions.Select(x => x.ID).ToArray(), repairRailwayEvent.RegionID);
+                ViewBag.depots = new SelectList(db.Depot.Select(x => new { x.ID, x.Name }).ToArray(), "ID", "Name", commonRepairEvent.DepotID);
+                return View();
+            }
             db.Database.ExecuteSql($"dbo.NewRepairRailwayEvent {commonRepairEvent.DepotID}, {commonRepairEvent.BeginDate}, {commonRepairEvent.EndDate}, {commonRepairEvent.Status}, {commonRepairEvent.Description}, {repairRailwayEvent.RegionID}, {repairRailwayEvent.BeginPoint}, {repairRailwayEvent.EndPoint}");
             return RedirectToAction("RepairRailwayEventList");
         }
@@ -382,6 +409,15 @@ namespace RailwayDBKurs.Controllers
         [HttpPost]
         public IActionResult EditRepairRailwayEvent(RepairRailwayEvent repairRailwayEvent, CommonRepairEvent commonRepairEvent)
         {
+            if (commonRepairEvent.BeginDate > commonRepairEvent.EndDate)
+            {
+                ModelState.AddModelError("", "Дата окончания ремонта должна быть после даты начала.");
+                ViewBag.railwayEventDetails = repairRailwayEvent;
+                ViewBag.commonEventDetails = commonRepairEvent;
+                ViewBag.regions = new SelectList(db.Regions.Select(x => x.ID).ToArray(), repairRailwayEvent.RegionID);
+                ViewBag.depots = new SelectList(db.Depot.Select(x => new { x.ID, x.Name }).ToArray(), "ID", "Name", commonRepairEvent.DepotID);
+                return View();
+            }
             db.RepairEvents.Update(commonRepairEvent);
             db.RepairRailwayEvents.Update(repairRailwayEvent);
             db.SaveChanges();
