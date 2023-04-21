@@ -22,12 +22,12 @@
         <br />
         <div>
             <p>Дата начала</p>
-                @Html.TextBox("BeginDate", commonEventDetails.BeginDate.HasValue ? commonEventDetails.BeginDate.Value.ToString("yyyy-MM-dd") : "", new { type="date" })
+            @Html.TextBox("BeginDate", commonEventDetails.BeginDate.HasValue ? commonEventDetails.BeginDate.Value.ToString("yyyy-MM-dd") : "", new { min="1800-01-01", type="date" })
         </div>
         <br />
         <div>
             <p>Дата окончания</p>
-            @Html.TextBox("EndDate", commonEventDetails.EndDate.HasValue ? commonEventDetails.EndDate.Value.ToString("yyyy-MM-dd") : "", new { type="date" })
+            @Html.TextBox("EndDate", commonEventDetails.EndDate.HasValue ? commonEventDetails.EndDate.Value.ToString("yyyy-MM-dd") : "", new { min="1800-01-01", type="date" })
         </div>
         <br />
         <div>

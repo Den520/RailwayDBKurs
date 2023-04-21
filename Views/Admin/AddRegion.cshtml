@@ -16,7 +16,7 @@
         <br />
         <div>
             <p>Дата ввода в эксплуатацию</p>
-            @Html.TextBoxFor(x => x.DateOfExploitation, "", new { type="date" })
+            @Html.TextBoxFor(x => x.DateOfExploitation, "", new { min="1800-01-01", type="date" })
         </div>
         <br />
         <div>
